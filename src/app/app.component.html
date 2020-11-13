@@ -1,3 +1,114 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+
+  <!-- <ion-menu side="start" menuId="custom" contentId="main" class="my-custom-menu">
+    <ion-header>
+      <ion-toolbar color="tertiary">
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item button (click)="open_notification()" id="profile_tag">
+          
+            <ion-thumbnail slot="start">
+              <ion-img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80"></ion-img>
+            </ion-thumbnail>
+          <ion-button fill="clear">
+            <ion-label>Dave</ion-label>
+          </ion-button>
+        </ion-item>
+        <ion-item ><ion-button fill="clear" routerLink="notification"><ion-icon name="log-out-outline"></ion-icon> Notification</ion-button></ion-item>
+        <ion-item ><ion-button fill="clear" (click)="open_notification()"><ion-icon name="log-out-outline"></ion-icon> Logout</ion-button></ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu> -->
+
+
+  <ion-menu type="overlay"  menuId="custom" contentId="main">
+    <ion-menu-toggle>
+      <ion-header class="top_header_app">
+          <ion-item *ngIf="!name" color="primary" (click)="open_profile_page()" >
+            <ion-toolbar color="primary">
+              <ion-avatar slot="start">
+                <img src = "{{user_image_icon}}" *ngIf="user_image_icon!=null" alt="" />
+                <img src = "https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" *ngIf="user_image_icon==null" alt="" />
+              </ion-avatar> 
+              <div style="text-align: left;">
+              <p style="margin: 20px 0px 0px 15px;">{{user_name}}</p>
+              <p style="margin: 5px 0px 20px 15px;font-size: 13px;">{{user_phone}}</p>
+              </div>
+            </ion-toolbar>
+        </ion-item>
+      </ion-header>
+    </ion-menu-toggle>
+    <ion-content>
+      <div *ngFor="let p of appPages">
+        <!-- Standard Menu Item -->
+        <ion-menu-toggle *ngIf="p.url">
+          <ion-item class="item-class"  [routerLink]="p.url" routerDirection="root" routerLinkActive="active" lines="none">
+            <!-- <ion-icon [name]="p.icon" slot="start"></ion-icon> -->
+            <ion-icon [name] ="p.icon" slot="start" style="width: 40px;"></ion-icon>
+            <ion-label>
+              {{ p.title }}
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <!-- Item with Children -->
+   
+        <ion-item class="item-class" button *ngIf="p.chileMenu?.length > 0" (click)="p.open = !p.open" [class.parent-active]="p.open" detail="false">
+          <ion-icon slot="start" name="arrow-forward" *ngIf="!p.open"></ion-icon>
+          <ion-icon slot="start" name="arrow-down" *ngIf="p.open"></ion-icon>
+          <ion-label>{{ p.title }}</ion-label>
+        </ion-item>
+   
+        <!-- Children List for clicked Item -->
+        <ion-list *ngIf="p.open">
+          <ion-menu-toggle>
+            <ion-item *ngFor="let sub of p.chileMenu" class="sub-item" [routerLink]="sub.url" routerDirection="root"
+              routerLinkActive="active">
+              <!-- <ion-icon [name]="sub.icon" slot="start"></ion-icon> -->
+              <ion-img [src] ="sub.icon" slot="start" style="width: 24px;"></ion-img>
+              <ion-label>
+                {{ sub.title }}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </div>
+      
+      <ion-menu-toggle>
+        <ion-item class="item-class" lines="none" (click)="authservice.signOut()">
+          <ion-icon name="log-out-outline" slot="start" style="width: 40px;"></ion-icon>
+          <ion-label>
+            Sign Out
+          </ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+    </ion-content>
+    <ion-footer class="menu-footer">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-text text-center>
+              <p class="no_text_decoration" style="margin-top: 0px;margin-bottom: 0px;">
+                App Version : 1.0
+              </p>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-text text-center>
+              <p class="no_text_decoration" style="margin-top: 0px;">
+                Copyright &copy; 2020 99 Seller.
+              </p>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-footer>
+  </ion-menu>
+
+  <ion-router-outlet id="main"></ion-router-outlet>
 </ion-app>

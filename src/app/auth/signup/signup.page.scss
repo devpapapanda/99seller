@@ -1,0 +1,44 @@
+.login-logo {
+    padding: 20px 0;
+    min-height: 200px;
+    text-align: center;
+  }
+  
+  .login-logo img {
+    max-width: 150px;
+  }
+  
+  .list {
+    margin-bottom: 0;
+  }
+  
+  ion-item:first-child {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+  ion-item:last-child {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  ion-item.item {
+    background-color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 1px;
+    .label {
+      width: 10%;
+      color: rgba(0, 0, 0, 0.6);
+      font-size: 1.2em;
+    }
+  }
+  
+  .roundedInput {
+    --border-radius: 25px;
+    --border-width: 1px;
+    --box-shadow: 2px gray;
+    --highlight-height: 0;
+    --background: #f8f9fa;
+   }
+  
+   .input_icon{
+     padding-top: 15px;
+   }
+  

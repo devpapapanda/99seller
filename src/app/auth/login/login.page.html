@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    
+
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="login-logo">
+    <img src="assets/icon/icon.png" alt="Ionic logo">
+  </div>
+
+  <form #loginForm="ngForm" novalidate >
+    <ion-list>
+      <ion-item >
+        <ion-label position="floating" color="primary"><ion-icon name="person-circle-outline"></ion-icon> Username</ion-label>
+        <ion-input [(ngModel)]="user_name" name="username" type="text" #username="ngModel" spellcheck="false" autocapitalize="off"
+          required>
+        </ion-input>
+      </ion-item>
+
+      <!-- <ion-text color="danger">
+        <p [hidden]="username.valid || submitted == false" class="ion-padding-start">
+          Username is required
+        </p>
+      </ion-text> -->
+
+      <ion-item >
+        <ion-label position="floating" color="primary"><ion-icon name="lock-closed-outline"></ion-icon> Password</ion-label>
+        <ion-input [(ngModel)]="pass" name="password" [type]="passwordType"  #password="ngModel" required></ion-input>
+        <ion-icon slot="end" class="input_icon" [name]="passwordIcon" color="primary" (click)='hideShowPassword()'></ion-icon>
+      </ion-item>
+
+      <!-- <ion-text color="danger">
+        <p [hidden]="password.valid || submitted == false" class="ion-padding-start">
+          Password is required
+        </p>
+      </ion-text> -->
+    </ion-list>
+
+    <ion-row>
+      <ion-col>
+        <ion-button shape="round"  (click)="Login(loginForm)" type="submit" expand="block">Login</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button  shape="round" (click)="Signup()" color="light" expand="block">Signup</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+
+</ion-content>

@@ -1,5 +1,7 @@
 {
   "name": "99seller",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
